@@ -23,6 +23,10 @@ namespace Delivery.Infrastructure.Memory
         {
             return _pedidos.Where(p => p.Status == Pedido.StatusPedido.Cancelado).ToList();
         }
+        public Pedido BuscarPedido(int id)
+        {
+            return _pedidos.FirstOrDefault(p => p.Id == id);
+        }
         public void AtualizarPedido(Pedido pedido)
         {
             var index = _pedidos.FindIndex(p => p.Id == id);
