@@ -46,6 +46,37 @@ namespace Delivery.Application.services
             pedido.AtualizarDados(clienteId,enderecoEntrega);
             _pedRepo.AtualizarPedido(pedido);
         }
-
+        public void ConfirmarPedido(int id) 
+        {
+            var pedido = _pedRepo.BuscarPedido(id);
+            if (pedido == null)
+                throw new Exception("Pedido não Encontrado");
+            pedido.Status = Pedido.StatusPedido.Confirmado;
+            _pedRepo.AtualizarPedido(pedido);
+        } 
+        public void CancelarPedido(int id)
+        {
+            var pedido = _pedRepo.BuscarPedido(id);
+            if (pedido == null)
+                throw new Exception("Pedido não encontrado");
+            pedido.Status = Pedido.StatusPedido.Cancelado;
+            _pedRepo.AtualizarPedido(pedido);
+        }
+        public void EmPreparacao(int id)
+        {
+            var pedido = _pedRepo.BuscarPedido(id);
+            if (pedido == null)
+                throw new Exception("Pedido não encontrado");  
+            pedido.Status = Pedido.StatusPedido.EmPreparacao;
+            _pedRepo.AtualizarPedido(pedido);
+        }
+        public void ProntoParaEnvio(int id)
+        {
+            var pedido = _pedRepo.BuscarPedido(id);
+            if (pedido == null)
+                throw new Exception("Pedido não encontrado");
+            pedido.Status = Pedido.StatusPedido.ProntoParaEnvio;
+            _pedRepo.AtualizarPedido(pedido);
+        }
     }
 }
