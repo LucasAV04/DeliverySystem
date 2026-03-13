@@ -1,12 +1,12 @@
-﻿
-using Delivery.Domain;
+﻿using Delivery.Domain;
+using Delivery.Infrastructure.Interfaces;
 
-namespace Delivery.Application.services
+namespace Delivery.Application.Services
 {
     public class MotoristaService
     {
         private readonly IMotoristaRepository _motRepo;
-        
+
         public MotoristaService(IMotoristaRepository motRepo)
         {
             _motRepo = motRepo;
@@ -14,10 +14,10 @@ namespace Delivery.Application.services
 
         public void AdicionarMotorista(string nome, string telefone, string cnh)
         {
-            if (nome == null || telefone == null || cnh == null)
-                throw new Exception("Não pode deixar os campos em Branco");
+            if (string.IsNullOrWhiteSpace(nome) || string.IsNullOrWhiteSpace(telefone) || string.IsNullOrWhiteSpace(cnh))
+                throw new ArgumentException("Nome, telefone e CNH são obrigatórios");
 
-            Motorista motorista = new Motorista
+            var motorista = new Motorista
             {
                 Nome = nome,
                 Telefone = telefone,
@@ -26,30 +26,39 @@ namespace Delivery.Application.services
             };
             _motRepo.AdicionarMotorista(motorista);
         }
+
         public List<Motorista> ListarMotoristas()
         {
             return _motRepo.ListarMotorista();
         }
+
         public List<Motorista> ListarMotoristaAtivos()
         {
             return _motRepo.ListarMotoristaAtivos();
         }
+
         public void BloquearMotorista(int id)
         {
             var motorista = _motRepo.BuscarPorId(id);
             if (motorista == null)
-                throw new Exception("Motorista não Encontrado");
+                throw new KeyNotFoundException("Motorista não encontrado");
+
+            if (motorista.Status == Motorista.StatusMotorista.Bloqueado)
+                throw new InvalidOperationException("O motorista já está bloqueado");
+
             motorista.Status = Motorista.StatusMotorista.Bloqueado;
             _motRepo.AtualizarMotorista(motorista);
         }
+
         public void InativarMotorista(int id)
         {
             var motorista = _motRepo.BuscarPorId(id);
             if (motorista == null)
-                throw new Exception("Motorista não Encontrado");
+                throw new KeyNotFoundException("Motorista não encontrado");
 
             if (motorista.Status == Motorista.StatusMotorista.EmRota)
-                throw new Exception("O Motorista não pode ser inativado pois está em rota");
+                throw new InvalidOperationException("O motorista não pode ser inativado pois está em rota");
+
             motorista.Status = Motorista.StatusMotorista.Inativo;
             _motRepo.AtualizarMotorista(motorista);
         }
@@ -58,18 +67,24 @@ namespace Delivery.Application.services
         {
             var motorista = _motRepo.BuscarPorId(id);
             if (motorista == null)
-                throw new Exception("Motorista não Encontrado");
+                throw new KeyNotFoundException("Motorista não encontrado");
+
             if (motorista.Status == Motorista.StatusMotorista.Bloqueado)
-                throw new Exception("Motorista Bloqueado não pode ser ativado");
+                throw new InvalidOperationException("Motorista bloqueado não pode ser ativado diretamente");
+
             motorista.Status = Motorista.StatusMotorista.Ativo;
             _motRepo.AtualizarMotorista(motorista);
         }
-            
+
         public void AtualizarMotorista(int id, string nome, string telefone, string cnh)
         {
+            if (string.IsNullOrWhiteSpace(nome) || string.IsNullOrWhiteSpace(telefone) || string.IsNullOrWhiteSpace(cnh))
+                throw new ArgumentException("Nome, telefone e CNH são obrigatórios");
+
             var motorista = _motRepo.BuscarPorId(id);
             if (motorista == null)
-                throw new Exception("Motorista não Encontrado");
+                throw new KeyNotFoundException("Motorista não encontrado");
+
             motorista.AtualizarDados(nome, telefone, cnh);
             _motRepo.AtualizarMotorista(motorista);
         }

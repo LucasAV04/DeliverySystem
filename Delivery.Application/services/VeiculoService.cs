@@ -1,7 +1,7 @@
 ﻿using Delivery.Domain;
 using Delivery.Infrastructure.Interfaces;
 
-namespace Delivery.Application.services
+namespace Delivery.Application.Services
 {
     public class VeiculoService
     {
@@ -12,16 +12,21 @@ namespace Delivery.Application.services
             _veiRepo = veiculoRepo;
         }
 
-        public void AdicionarVeiculo(string placa,string modelo,string ano,decimal capacidadeCarga)
+        public void AdicionarVeiculo(string placa, string modelo, string ano, decimal capacidadeCarga)
         {
-            if (placa == null || modelo == null || ano == null || capacidadeCarga == 0)
-                throw new Exception("Não pode deixar os campos em Branco");
-            Veiculo veiculo = new Veiculo
+            if (string.IsNullOrWhiteSpace(placa) || string.IsNullOrWhiteSpace(modelo) || string.IsNullOrWhiteSpace(ano))
+                throw new ArgumentException("Placa, modelo e ano são obrigatórios");
+
+            if (capacidadeCarga <= 0)
+                throw new ArgumentException("A capacidade de carga deve ser maior que zero");
+
+            var veiculo = new Veiculo
             {
                 Placa = placa,
                 Modelo = modelo,
                 Ano = ano,
-                CapacidadeCarga = capacidadeCarga
+                CapacidadeCarga = capacidadeCarga,
+                Status = Veiculo.StatusVeiculo.Disponivel
             };
             _veiRepo.AdicionarVeiculo(veiculo);
         }
@@ -30,6 +35,7 @@ namespace Delivery.Application.services
         {
             return _veiRepo.ListarVeiculos();
         }
+
         public List<Veiculo> ListarVeiculoDisponivel()
         {
             return _veiRepo.ListarVeiculoDisponivel();
@@ -37,10 +43,17 @@ namespace Delivery.Application.services
 
         public void AtualizarVeiculo(int id, string placa, string modelo, string ano, decimal capacidadeCarga)
         {
+            if (string.IsNullOrWhiteSpace(placa) || string.IsNullOrWhiteSpace(modelo) || string.IsNullOrWhiteSpace(ano))
+                throw new ArgumentException("Placa, modelo e ano são obrigatórios");
+
+            if (capacidadeCarga <= 0)
+                throw new ArgumentException("A capacidade de carga deve ser maior que zero");
+
             var veiculo = _veiRepo.BuscarVeiculo(id);
             if (veiculo == null)
-                throw new Exception("Veiculo não Encontrado");
-            veiculo.AtualizarDados(placa,modelo, ano,capacidadeCarga);
+                throw new KeyNotFoundException("Veículo não encontrado");
+
+            veiculo.AtualizarDados(placa, modelo, ano, capacidadeCarga);
             _veiRepo.AtualizarVeiculo(veiculo);
         }
 
@@ -48,7 +61,11 @@ namespace Delivery.Application.services
         {
             var veiculo = _veiRepo.BuscarVeiculo(id);
             if (veiculo == null)
-                throw new Exception("Veiculo não encontrado");
+                throw new KeyNotFoundException("Veículo não encontrado");
+
+            if (veiculo.Status == Veiculo.StatusVeiculo.EmUso)
+                throw new InvalidOperationException("O veículo não pode ir para manutenção pois está em uso");
+
             veiculo.Status = Veiculo.StatusVeiculo.EmManutencao;
             _veiRepo.AtualizarVeiculo(veiculo);
         }
@@ -57,18 +74,24 @@ namespace Delivery.Application.services
         {
             var veiculo = _veiRepo.BuscarVeiculo(id);
             if (veiculo == null)
-                throw new Exception("Veiculo não encontrado");
+                throw new KeyNotFoundException("Veículo não encontrado");
 
             if (veiculo.Status == Veiculo.StatusVeiculo.EmUso)
-                throw new Exception("O Veiculo não pode ser inativado pois está em uso");
+                throw new InvalidOperationException("O veículo não pode ser inativado pois está em uso");
+
             veiculo.Status = Veiculo.StatusVeiculo.Inativo;
             _veiRepo.AtualizarVeiculo(veiculo);
         }
+
         public void AtivarVeiculo(int id)
         {
             var veiculo = _veiRepo.BuscarVeiculo(id);
             if (veiculo == null)
-                throw new Exception("Veiculo não encontrado");
+                throw new KeyNotFoundException("Veículo não encontrado");
+
+            if (veiculo.Status == Veiculo.StatusVeiculo.EmUso)
+                throw new InvalidOperationException("O veículo já está em uso");
+
             veiculo.Status = Veiculo.StatusVeiculo.Disponivel;
             _veiRepo.AtualizarVeiculo(veiculo);
         }

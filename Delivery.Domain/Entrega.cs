@@ -5,13 +5,14 @@ public class Entrega
     public int PedidoId {  get; set; }
     public int MotoristaId {  get; set; }
     public int VeiculoId { get; set; }
-    public string DataSaida { get; set; }
-    public string DataEntrega {  get; set; }
-    public bool Status {  get; set; }
+    public DateTime DataSaida { get; set; }
+    public DateTime? DataEntrega {  get; set; }
+    public string? Observacoes { get; set; }
+    public StatusEntrega Status {  get; set; }
 
     public enum StatusEntrega
     {
-        Pendenete,
+        Pendente,
         EmAndamento,
         Concluida,
         Falha,

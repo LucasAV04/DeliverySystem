@@ -1,5 +1,4 @@
-﻿
-using Delivery.Domain;
+﻿using Delivery.Domain;
 
 namespace Delivery.Infrastructure.Interfaces
 {
@@ -8,8 +7,8 @@ namespace Delivery.Infrastructure.Interfaces
         void AdicionarCliente(Cliente cliente);
         List<Cliente> ListarClientes();
         List<Cliente> ListarClientesVip();
-        Cliente BuscarClienteId(int id);
-        Cliente BuscarClienteCpf(string cpf);
+        Cliente? BuscarClienteId(int id);
+        Cliente? BuscarClienteCpf(string cpf);
         void AtualizarCliente(Cliente cliente);
     }
 }
