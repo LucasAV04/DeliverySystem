@@ -27,7 +27,7 @@ namespace Delivery.Application.Services
             {
                 ClienteId = clienteId,
                 EnderecoEntrega = enderecoEntrega,
-                DataSolicitacao = DateTime.Now,
+                DataSolicitacao = DateTime.UtcNow,
                 Status = Pedido.StatusPedido.Criado
             };
             _pedRepo.AdicionarPedido(pedido);

@@ -64,7 +64,7 @@ namespace Delivery.Application.Services
                 PedidoId = pedidoId,
                 MotoristaId = motoristaId,
                 VeiculoId = veiculoId,
-                DataSaida = DateTime.Now,
+                DataSaida = DateTime.UtcNow,
                 Status = Entrega.StatusEntrega.EmAndamento
             };
 
@@ -124,7 +124,7 @@ namespace Delivery.Application.Services
                 throw new Exception("Informe o motivo da falha nas observações");
 
             entrega.Status = Entrega.StatusEntrega.Falha;
-            entrega.DataEntrega = DateTime.Now;
+            entrega.DataEntrega = DateTime.UtcNow;
             entrega.Observacoes = observacoes;
             _entregaRepo.AtualizarEntrega(entrega);
 

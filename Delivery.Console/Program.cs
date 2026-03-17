@@ -370,7 +370,7 @@ static void ListarPedidos(PedidoService service)
     var pedidos = service.ListarPedidos();
     if (pedidos.Count == 0) { Console.WriteLine("Nenhum pedido cadastrado."); return; }
     foreach (var p in pedidos)
-        Console.WriteLine($"Id: {p.Id} | Cliente Id: {p.ClienteId} | Endereço: {p.EnderecoEntrega} | Status: {p.Status} | Data: {p.DataSolicitacao:dd/MM/yyyy HH:mm}");
+        Console.WriteLine($"Id: {p.Id} | Cliente Id: {p.ClienteId} | Endereço: {p.EnderecoEntrega} | Status: {p.Status} | Data: {p.DataSolicitacao:Dia:dd HH:mm}");
 }
 
 static void ListarPedidosCancelados(PedidoService service)
@@ -378,7 +378,7 @@ static void ListarPedidosCancelados(PedidoService service)
     var cancelados = service.ListarPedidosCancelados();
     if (cancelados.Count == 0) { Console.WriteLine("Nenhum pedido cancelado."); return; }
     foreach (var p in cancelados)
-        Console.WriteLine($"Id: {p.Id} | Cliente Id: {p.ClienteId} | Endereço: {p.EnderecoEntrega} | Data: {p.DataSolicitacao:dd/MM/yyyy HH:mm}");
+        Console.WriteLine($"Id: {p.Id} | Cliente Id: {p.ClienteId} | Endereço: {p.EnderecoEntrega} | Data: {p.DataSolicitacao:Dia:dd HH:mm}");
 }
 
 static void ConfirmarPedido(PedidoService service)
@@ -473,7 +473,7 @@ static void ListarEntregas(EntregaService service)
     var entregas = service.ListarEntregas();
     if (entregas.Count == 0) { Console.WriteLine("Nenhuma entrega registrada."); return; }
     foreach (var e in entregas)
-        Console.WriteLine($"Id: {e.Id} | Pedido: {e.PedidoId} | Motorista: {e.MotoristaId} | Veículo: {e.VeiculoId} | Status: {e.Status} | Saída: {e.DataSaida:dd/MM/yyyy HH:mm} | Entrega: {(e.DataEntrega.HasValue ? e.DataEntrega.Value.ToString("dd/MM/yyyy HH:mm") : "—")}");
+        Console.WriteLine($"Id: {e.Id} | Pedido: {e.PedidoId} | Motorista: {e.MotoristaId} | Veículo: {e.VeiculoId} | Status: {e.Status} | Saída: {e.DataSaida:Dia:dd HH:mm} | Entrega: {(e.DataEntrega.HasValue ? e.DataEntrega.Value.ToString("dd/MM/yyyy HH:mm") : "—")}");
 }
 
 
