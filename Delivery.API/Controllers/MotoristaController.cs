@@ -1,4 +1,5 @@
-﻿using Delivery.Application.Services;
+
+using Delivery.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,8 +7,8 @@ namespace Delivery.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
-    public class MotoristaController:ControllerBase
+  
+    public class MotoristaController : ControllerBase
     {
         private readonly MotoristaService _service;
 
@@ -17,11 +18,11 @@ namespace Delivery.API.Controllers
         }
         [HttpPost("Adicionar")]
 
-        public IActionResult Adicionar([FromBody] MotoristaRequest  request)
+        public IActionResult Adicionar([FromBody] MotoristaRequest request)
         {
             try
             {
-                _service.AdicionarMotorista(request.nome,request.telefone,request.cnh);
+                _service.AdicionarMotorista(request.nome, request.telefone, request.cnh);
                 return Ok("Motorista Cadastrado com Sucesso");
             }
             catch (ArgumentException ex)
@@ -60,13 +61,13 @@ namespace Delivery.API.Controllers
                 _service.BloquearMotorista(id);
                 return Ok("Motorista Bloqueado");
             }
-            catch (KeyNotFoundException ex) 
-            { 
-                return NotFound(ex.Message); 
-            }
-            catch (InvalidOperationException ex) 
+            catch (KeyNotFoundException ex)
             {
-                return Conflict(ex.Message); 
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
             }
         }
 
@@ -96,11 +97,11 @@ namespace Delivery.API.Controllers
                 _service.AtivarMotorista(id);
                 return Ok("Motorista Ativado");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -112,14 +113,14 @@ namespace Delivery.API.Controllers
         {
             try
             {
-                _service.AtualizarMotorista(id,request.nome,request.telefone,request.cnh);
+                _service.AtualizarMotorista(id, request.nome, request.telefone, request.cnh);
                 return Ok("Motorista Atualizado com Sucesso");
             }
             catch (KeyNotFoundException ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return NotFound(ex.Message);
             }

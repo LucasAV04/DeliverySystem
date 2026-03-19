@@ -1,4 +1,5 @@
-﻿using Delivery.Application.Services;
+
+using Delivery.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,8 +7,8 @@ namespace Delivery.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
-    public class PedidoController:ControllerBase
+  
+    public class PedidoController : ControllerBase
     {
         private readonly PedidoService _service;
 
@@ -17,7 +18,7 @@ namespace Delivery.API.Controllers
         }
 
         [HttpPost("Adicionar")]
-        public IActionResult AdicionarPedido([FromBody]PedidoRequest request)
+        public IActionResult AdicionarPedido([FromBody] PedidoRequest request)
         {
             try
             {
@@ -53,18 +54,18 @@ namespace Delivery.API.Controllers
         }
 
         [HttpPut("{id}/AtualizarPedido")]
-        public IActionResult AtualizarPedido(int id,[FromBody] PedidoRequest request)
+        public IActionResult AtualizarPedido(int id, [FromBody] PedidoRequest request)
         {
             try
             {
                 _service.AtualizarPedido(id, request.clienteId, request.enderecoEntrega);
                 return Ok("Pedido atualizado com sucesso");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -78,11 +79,11 @@ namespace Delivery.API.Controllers
                 _service.ConfirmarPedido(id);
                 return Ok("Pedido confirmado");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -96,11 +97,11 @@ namespace Delivery.API.Controllers
                 _service.CancelarPedido(id);
                 return Ok("Pedido Cancelado");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -114,11 +115,11 @@ namespace Delivery.API.Controllers
                 _service.EmPreparacao(id);
                 return Ok("Pedido em Preparação");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -132,11 +133,11 @@ namespace Delivery.API.Controllers
                 _service.ProntoParaEnvio(id);
                 return Ok("Pedido pronto para envio");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }

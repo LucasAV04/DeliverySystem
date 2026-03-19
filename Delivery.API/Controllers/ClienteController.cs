@@ -1,3 +1,4 @@
+
 using Delivery.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ namespace Delivery.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+   
     public class ClienteController : ControllerBase
     {
         private readonly ClienteService _service;
@@ -24,13 +25,13 @@ namespace Delivery.API.Controllers
                 _service.AdicionarCliente(request.Nome, request.Cpf, request.Email);
                 return Ok("Cliente cadastrado com sucesso!");
             }
-            catch (ArgumentException ex) 
-            { 
-                return BadRequest(ex.Message); 
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
             }
-            catch (InvalidOperationException ex) 
-            { 
-                return Conflict(ex.Message); 
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
             }
         }
 

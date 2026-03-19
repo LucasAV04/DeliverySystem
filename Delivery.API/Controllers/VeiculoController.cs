@@ -1,4 +1,5 @@
-﻿using Delivery.Application.Services;
+
+using Delivery.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace Delivery.API.Controllers
     [ApiController]
     [Route("[controller]")]
     [Authorize]
-    public class VeiculoController:ControllerBase
+    public class VeiculoController : ControllerBase
     {
         private readonly VeiculoService _service;
 
@@ -17,7 +18,7 @@ namespace Delivery.API.Controllers
         }
 
         [HttpPost("Adicionar")]
-        public IActionResult AdicionarVeiculo([FromBody]VeiculoRequest request)
+        public IActionResult AdicionarVeiculo([FromBody] VeiculoRequest request)
         {
             try
             {
@@ -53,14 +54,14 @@ namespace Delivery.API.Controllers
         }
 
         [HttpPut("{id}/Atualizar")]
-        public IActionResult Atualizar(int id,[FromBody] VeiculoRequest request)
+        public IActionResult Atualizar(int id, [FromBody] VeiculoRequest request)
         {
             try
             {
                 _service.AtualizarVeiculo(id, request.placa, request.modelo, request.ano, request.capacidadeCarga);
                 return Ok("Veiculo Atualizado com Sucesso");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -78,11 +79,11 @@ namespace Delivery.API.Controllers
                 _service.ManutencaoVeiculo(id);
                 return Ok("Veiculo foi para a Manutenção");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -96,11 +97,11 @@ namespace Delivery.API.Controllers
                 _service.InativarVeiculo(id);
                 return Ok("Veiculo foi Inativado");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -114,11 +115,11 @@ namespace Delivery.API.Controllers
                 _service.AtivarVeiculo(id);
                 return Ok("Veiculo Ativado");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }

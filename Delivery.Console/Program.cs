@@ -11,6 +11,7 @@ var config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
 
+
 var connectionString = config.GetConnectionString("DefaultConnection");
 
 var options = new DbContextOptionsBuilder<DeliveryDbContext>()

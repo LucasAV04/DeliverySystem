@@ -1,4 +1,5 @@
-﻿using Delivery.Application.Services;
+
+using Delivery.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,8 +7,8 @@ namespace Delivery.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
-    public class EntregaController:ControllerBase
+ 
+    public class EntregaController : ControllerBase
     {
         private readonly EntregaService _service;
 
@@ -17,7 +18,7 @@ namespace Delivery.API.Controllers
         }
 
         [HttpPost("IniciarEntrega")]
-        public IActionResult IniciarEntrega([FromBody]EntregaRequest request)
+        public IActionResult IniciarEntrega([FromBody] EntregaRequest request)
         {
             try
             {
@@ -26,9 +27,9 @@ namespace Delivery.API.Controllers
             }
             catch (ArgumentException ex)
             {
-                return BadRequest(ex.Message);  
+                return BadRequest(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -38,14 +39,14 @@ namespace Delivery.API.Controllers
         {
             try
             {
-                _service.ConcluirEntrega(id,request?.Observacoes);
+                _service.ConcluirEntrega(id, request?.Observacoes);
                 return Ok("Entrega Concluida");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -59,11 +60,11 @@ namespace Delivery.API.Controllers
                 _service.RegistrarFalha(id, request.Observacoes);
                 return Ok("A Falha foi Registrada");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -77,11 +78,11 @@ namespace Delivery.API.Controllers
                 _service.CancelarEntrega(id, request.Observacoes);
                 return Ok("Entrega Cancelada");
             }
-            catch(KeyNotFoundException ex)
+            catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return Conflict(ex.Message);
             }
