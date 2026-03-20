@@ -18,7 +18,7 @@ var options = new DbContextOptionsBuilder<DeliveryDbContext>()
     .UseNpgsql(connectionString)
     .Options;
 var context = new DeliveryDbContext(options);
-context.Database.EnsureCreated();
+context.Database.Migrate();
 IClienteRepository clienteRepo = new ClienteRepositoryPostgres(context);
 IMotoristaRepository motoristaRepo = new MotoristaRepositoryPostgres(context);
 IVeiculoRepository veiculoRepo = new VeiculoRepositoryPostgres(context);

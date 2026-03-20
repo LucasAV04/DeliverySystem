@@ -6,6 +6,7 @@
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Email { get; set; }
+        public string? Cnpj { get; set; }
         public StatusCliente Status { get; set; }
 
         public void AtualizarDados(string nome, string cpf, string email)
