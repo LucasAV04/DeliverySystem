@@ -43,6 +43,23 @@ namespace Delivery.API.Controllers
                 return NotFound("Nenhum cliente cadastrado.");
             return Ok(clientes);
         }
+        [HttpPut("{id}/DarVip")]
+        public IActionResult DarVip(int id)
+        {
+            try
+            {
+                _service.ClienteVip(id);
+                return Ok("Cliente agora é Vip");
+            }
+            catch(ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch(KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
         [HttpGet("ListarVip")]
         public IActionResult ListarVip()

@@ -7,7 +7,7 @@ namespace Delivery.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+
     public class VeiculoController : ControllerBase
     {
         private readonly VeiculoService _service;

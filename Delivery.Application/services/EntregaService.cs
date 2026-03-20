@@ -82,7 +82,7 @@ namespace Delivery.Application.Services
                 throw new Exception("Somente entregas em andamento podem ser concluídas");
 
             entrega.Status = Entrega.StatusEntrega.Concluida;
-            entrega.DataEntrega = DateTime.Now;
+            entrega.DataEntrega = DateTime.UtcNow;
             entrega.Observacoes = observacoes;
             _entregaRepo.AtualizarEntrega(entrega);
 

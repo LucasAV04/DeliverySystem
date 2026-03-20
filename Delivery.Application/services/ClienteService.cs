@@ -53,5 +53,14 @@ namespace Delivery.Application.Services
             cliente.AtualizarDados(nome, cpf, email);
             _cliRepo.AtualizarCliente(cliente);
         }
+
+        public void ClienteVip(int id)
+        {
+            var cliente = _cliRepo.BuscarClienteId(id);
+            if (cliente == null)
+                throw new KeyNotFoundException("Cliente não encontrado");
+            cliente.Status = Cliente.StatusCliente.Vip;
+            _cliRepo.AtualizarCliente(cliente);
+        }
     }
 }

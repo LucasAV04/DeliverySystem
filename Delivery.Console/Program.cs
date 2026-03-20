@@ -49,15 +49,17 @@ while (true)
         case "1":
             Console.WriteLine("1- Cadastrar Cliente");
             Console.WriteLine("2- Listar Todos");
-            Console.WriteLine("3- Listar VIPs");
-            Console.WriteLine("4- Atualizar Cliente");
+            Console.WriteLine("3- Dar Vip");
+            Console.WriteLine("4- Listar VIPs");
+            Console.WriteLine("5- Atualizar Cliente");
             string opCli = Console.ReadLine();
             switch (opCli)
             {
                 case "1": AdicionarCliente(clienteService); break;
                 case "2": ListarClientes(clienteService); break;
-                case "3": ListarClientesVip(clienteService); break;
-                case "4": AtualizarCliente(clienteService); break;
+                case "3": AdicionarVip(clienteService); break;
+                case "4": ListarClientesVip(clienteService); break;
+                case "5": AtualizarCliente(clienteService); break;
                 default: Console.WriteLine("Opção inválida."); break;
             }
             break;
@@ -194,7 +196,12 @@ static void ListarClientes(ClienteService service)
     foreach (var c in clientes)
         Console.WriteLine($"Id: {c.Id} | Nome: {c.Nome} | CPF: {c.Cpf} | E-mail: {c.Email} | Status: {c.Status}");
 }
-
+static void AdicionarVip(ClienteService service)
+{
+    Console.WriteLine("Digite o Id do Cliente:");
+    int id = int.Parse(Console.ReadLine());
+    service.ClienteVip(id);
+}
 static void ListarClientesVip(ClienteService service)
 {
     var vips = service.ListarClientesVip();
