@@ -216,7 +216,7 @@ namespace Delivery.Application.Services
 
         
         public List<(int VeiculoId, int TotalEntregas)> VeiculosMaisUtilizados()
-        {
+        {  
             return _entregaRepo.ListarEntregas()
                 .GroupBy(e => e.VeiculoId)
                 .Select(g => (VeiculoId: g.Key, TotalEntregas: g.Count()))
