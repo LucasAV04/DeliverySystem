@@ -1,0 +1,226 @@
+.cliente-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+
+.cliente-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  transform: translateY(-1px);
+}
+
+.cliente-card.aberto {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
+}
+
+/* Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  cursor: pointer;
+  gap: 12px;
+  
+}
+
+.card-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cliente-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cliente-nome {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cliente-email {
+  font-size: 13px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.card-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.status-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.toggle-icon {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* Body */
+.card-body {
+  border-top: 1px solid #f3f4f6;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card-detalhes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.detalhe-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detalhe-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.detalhe-valor {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* Ações */
+.card-acoes {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn:hover { opacity: 0.85; transform: scale(0.98); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-editar   { background: #f3f4f6; color: #374151; }
+.btn-salvar   { background: #6366f1; color: #fff; }
+.btn-cancelar { background: #f3f4f6; color: #374151; }
+
+/* Botões de status */
+.btn-status { font-size: 12px; padding: 6px 12px; }
+.btn-ativar   { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+.btn-inativar { background: #f9fafb; color: #6b7280; border: 1px solid #e5e7eb; }
+.btn-bloquear { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+.btn-darVip   { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+
+/* Formulário de edição */
+.form-editar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-titulo {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.form-group input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+}
+
+.form-acoes {
+  display: flex;
+  gap: 8px;
+}
+
+/* Mensagem */
+.msg {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.msg.sucesso {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.msg.erro {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}

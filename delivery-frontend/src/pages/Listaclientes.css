@@ -1,0 +1,225 @@
+.lista-clientes {
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header */
+.lista-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lista-titulo {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  text-align: left;
+}
+
+.lista-contagem {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.btn-novo {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-novo:hover { background: #4f46e5; }
+
+/* Formulário novo */
+.form-novo {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-novo-titulo {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  text-align: left;
+}
+
+.form-novo-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.form-group input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #111827;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+}
+
+.btn-salvar-novo {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s;
+}
+
+.btn-salvar-novo:hover { background: #4f46e5; }
+.btn-salvar-novo:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Mensagem */
+.msg {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.msg.sucesso { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+.msg.erro    { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+
+/* Busca */
+.busca-container {
+  width: 100%;
+}
+
+.busca-input {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #111827;
+  outline: none;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.busca-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+}
+
+/* Grid */
+.clientes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* Estados */
+.estado-vazio {
+  text-align: center;
+  padding: 48px 20px;
+  color: #9ca3af;
+  font-size: 15px;
+}
+
+.estado-erro {
+  text-align: center;
+  padding: 32px;
+  color: #dc2626;
+  background: #fef2f2;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* Paginação */
+.paginacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pag-btn {
+  padding: 7px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pag-btn:hover:not(:disabled) { background: #f3f4f6; }
+.pag-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pag-numeros {
+  display: flex;
+  gap: 4px;
+}
+
+.pag-num {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pag-num:hover { background: #f3f4f6; }
+
+.pag-num.ativo {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #fff;
+}

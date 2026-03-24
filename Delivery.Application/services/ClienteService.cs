@@ -54,11 +54,54 @@ namespace Delivery.Application.Services
             _cliRepo.AtualizarCliente(cliente);
         }
 
-        public void ClienteVip(int id)
+        public void AtivarCliente(int id)
         {
             var cliente = _cliRepo.BuscarClienteId(id);
             if (cliente == null)
                 throw new KeyNotFoundException("Cliente não encontrado");
+
+            if (cliente.Status == Cliente.StatusCliente.Bloqueado)
+                throw new InvalidOperationException("Clientes bloqueados não podem ser ativados diretamente");
+
+            cliente.Status = Cliente.StatusCliente.Ativo;
+            _cliRepo.AtualizarCliente(cliente);
+        }
+
+        public void InativarCliente(int id)
+        {
+            var cliente = _cliRepo.BuscarClienteId(id);
+            if (cliente == null)
+                throw new KeyNotFoundException("Cliente não encontrado");
+
+            if (cliente.Status == Cliente.StatusCliente.Bloqueado)
+                throw new InvalidOperationException("Cliente bloqueado não pode ser inativado");
+
+            cliente.Status = Cliente.StatusCliente.Inativo;
+            _cliRepo.AtualizarCliente(cliente);
+        }
+
+        public void BloquearCliente(int id)
+        {
+            var cliente = _cliRepo.BuscarClienteId(id);
+            if (cliente == null)
+                throw new KeyNotFoundException("Cliente não encontrado");
+
+            if (cliente.Status == Cliente.StatusCliente.Bloqueado)
+                throw new InvalidOperationException("O cliente já está bloqueado");
+
+            cliente.Status = Cliente.StatusCliente.Bloqueado;
+            _cliRepo.AtualizarCliente(cliente);
+        }
+
+        public void DarVip(int id)
+        {
+            var cliente = _cliRepo.BuscarClienteId(id);
+            if (cliente == null)
+                throw new KeyNotFoundException("Cliente não encontrado");
+
+            if (cliente.Status == Cliente.StatusCliente.Bloqueado || cliente.Status == Cliente.StatusCliente.Inativo)
+                throw new InvalidOperationException("Clientes inativos ou bloqueados não podem ser promovidos a VIP");
+
             cliente.Status = Cliente.StatusCliente.Vip;
             _cliRepo.AtualizarCliente(cliente);
         }

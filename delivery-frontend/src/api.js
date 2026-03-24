@@ -5,16 +5,21 @@ async function request(endpoint, options = {}) {
   const url = `${API_URL}/${endpoint}`;
   const headers = {
     "Content-Type": "application/json",
-    "x-api-key": API_KEY,
+    "X-Api-Key": API_KEY,
     ...options.headers,
   };
 
   const response = await fetch(url, { ...options, headers });
   if (!response.ok) throw new Error(await response.text());
-  return response.json();
+
+  const text = await response.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text;
+  }
 }
 
-// Métodos da API Cliente
 export const ClienteAPI = {
   adicionar: (cliente) =>
     request("Cliente/Adicionar", {
@@ -26,14 +31,17 @@ export const ClienteAPI = {
 
   listarVip: () => request("Cliente/ListarVip"),
 
-  darVip: (id) =>
-    request(`Cliente/${id}/DarVip`, {
-      method: "PUT",
-    }),
-
   atualizar: (id, cliente) =>
     request(`Cliente/${id}/Atualizar`, {
       method: "PUT",
       body: JSON.stringify(cliente),
     }),
-};
+
+  ativar: (id) => request(`Cliente/${id}/Ativar`, { method: "PUT" }),
+
+  inativar: (id) => request(`Cliente/${id}/Inativar`, { method: "PUT" }),
+
+  bloquear: (id) => request(`Cliente/${id}/Bloquear`, { method: "PUT" }),
+
+  darVip: (id) => request(`Cliente/${id}/DarVip`, { method: "PUT" }),
+};  
