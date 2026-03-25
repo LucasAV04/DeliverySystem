@@ -2,6 +2,8 @@
 bin/
 obj/
 
+appsettings.json
+appsettings.*.json
 # Visual Studio
 .vs/
 
