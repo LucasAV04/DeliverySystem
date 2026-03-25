@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ClienteAPI } from "../api";
 import ClienteCard from "../components/ClienteCard";
-import "./ListaClientes.css";
+import "./Lista.css";
 
 const POR_PAGINA = 6;
 

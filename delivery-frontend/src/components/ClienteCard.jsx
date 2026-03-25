@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ClienteAPI } from "../api";
-import "./ClienteCard.css";
+import "./Card.css";
 
 // Dados locais do cliente ficam aqui para atualizar sem precisar recarregar
 function ClienteCard({ cliente: clienteInicial, onAtualizado }) {
